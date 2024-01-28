@@ -1,6 +1,4 @@
-import { NextApiRequest } from 'next'
-
-export async function GET(req: NextApiRequest) {
+export async function GET() {
   return Response.json({
     createdBy: 'Truong Nguyen',
     Note: 'Apis return randomized info. Params are case insensitive',
