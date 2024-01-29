@@ -1,15 +1,5 @@
-import { fa, faker } from '@faker-js/faker'
 import { initializeApp } from 'firebase/app'
-import {
-  Timestamp,
-  addDoc,
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  getFirestore,
-  setDoc,
-} from 'firebase/firestore'
+import { Timestamp, addDoc, collection, getDocs, getFirestore } from 'firebase/firestore'
 import { NextRequest } from 'next/server'
 
 const firebaseConfig = {
@@ -21,8 +11,8 @@ const firebaseConfig = {
   appId: process.env.APP_ID,
 }
 
-export const app = initializeApp(firebaseConfig)
-export const db = getFirestore(app)
+const app = initializeApp(firebaseConfig)
+const db = getFirestore(app)
 
 export async function GET() {
   const snap = await getDocs(collection(db, 'message'))
