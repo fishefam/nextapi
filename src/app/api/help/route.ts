@@ -1,7 +1,7 @@
 export async function GET() {
   return Response.json({
     createdBy: 'Truong Nguyen',
-    Note: 'Apis return randomized info. Params are case insensitive. `looper` api is intended to be used in browser.',
+    Note: 'Params in `student` api are case insensitive. Params in `looper` api are case sensitive. `looper` api is intended to be used in browser. Database for `message` api is in dev mode and not secure.',
     mainLibraries: ['NextJS', 'Faker'],
     endpoints: {
       '/api/message':
