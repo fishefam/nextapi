@@ -19,7 +19,7 @@ export async function GET(req: NextRequest, { params }: { params: { slug: string
     const id = params.slug
     const snap = await getDoc(doc(db, 'message', id))
     const { text, createdAt } = snap.data() as { createdAt: Timestamp; text: string }
-    return Response.json({ message: text, id, createdAt: createdAt.toDate() })
+    return Response.json({ message: text, id, createdAt: createdAt?.toDate() })
   } catch {
     return Response.json({ successful: false })
   }

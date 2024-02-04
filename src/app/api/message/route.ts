@@ -19,7 +19,7 @@ export async function GET() {
   const messages = snap.docs.map((doc) => ({
     message: doc.data().text,
     id: doc.id,
-    createdAt: doc.data().createdAt.toDate(),
+    createdAt: doc.data().createdAt?.toDate(),
   }))
   return Response.json(messages)
 }
@@ -27,9 +27,6 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   try {
     const { message } = (await req.json()) as { message: string | string[] }
-    // const message = new Array(234).fill(
-    //   faker.lorem.paragraphs(faker.number.int({ min: 1, max: 3 }))
-    // )
 
     if (message instanceof Array) {
       const submission = await Promise.all(
@@ -43,7 +40,10 @@ export async function POST(req: NextRequest) {
       return Response.json({ successful: true, queryIds: submission.map(({ id }) => id) })
     }
 
-    const { id } = await addDoc(collection(db, 'message'), { text: message })
+    const { id } = await addDoc(collection(db, 'message'), {
+      text: message,
+      createdAt: Timestamp.fromDate(new Date()),
+    })
     return Response.json({ queryId: id, successful: true })
   } catch {
     return Response.json({ successful: false })
